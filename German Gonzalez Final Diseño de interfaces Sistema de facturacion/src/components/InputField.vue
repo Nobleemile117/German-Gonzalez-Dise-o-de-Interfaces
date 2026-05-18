@@ -1,9 +1,10 @@
-
 <template>
   <div class="input-wrap">
 
+    
     <label class="input-wrap__label">{{ label }}</label>
 
+    
     <button
       v-if="help"
       class="input-wrap__help"
@@ -13,7 +14,7 @@
       ?
     </button>
 
-
+    
     <input
       class="input"
       :class="`input--${color}`"
@@ -39,6 +40,7 @@ export default {
 </script>
 
 <style scoped>
+
 .input-wrap {
   position: relative;
   padding-top: var(--gap-sm);

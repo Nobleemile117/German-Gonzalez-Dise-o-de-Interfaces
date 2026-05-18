@@ -1,4 +1,3 @@
-
 <template>
   <header class="header">
     <img class="header__logo" :src="logo" alt="Logo Brazza y Fogo">
@@ -21,6 +20,7 @@ export default {
 </script>
 
 <style scoped>
+
 .header {
   background: var(--color-primary);
   display: flex;
@@ -51,14 +51,12 @@ export default {
   font-size: var(--font-size-xl);
 }
 
-/* ── Tablet ── */
 @media (max-width: 900px) {
   .header__title   { font-size: 22px; }
   .header__address { font-size: 15px; }
   .header__logo    { width: 80px; height: 80px; }
 }
 
-/* ── Phone ── */
 @media (max-width: 480px) {
   .header          { flex-direction: column; text-align: center; padding: 20px 16px; min-height: auto; }
   .header__title   { font-size: 18px; }

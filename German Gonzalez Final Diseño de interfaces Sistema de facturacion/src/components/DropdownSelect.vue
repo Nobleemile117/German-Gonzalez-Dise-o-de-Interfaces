@@ -1,4 +1,3 @@
-
 <template>
   <div class="dropdown-wrap">
 
@@ -7,6 +6,7 @@
       :value="modelValue"
       @change="$emit('update:modelValue', $event.target.value)">
 
+      
       <option
         v-for="opt in options"
         :key="opt.value"
@@ -17,6 +17,7 @@
 
     </select>
 
+    
     <span class="dropdown__arrow">▼</span>
 
   </div>
@@ -34,6 +35,7 @@ export default {
 </script>
 
 <style scoped>
+
 .dropdown-wrap {
   position: relative;
 }

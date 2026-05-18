@@ -1,19 +1,17 @@
-
-═══════════════════════════════════════════ */
 :root {
-  /* Colors */
-  --color-primary:    #5386F4;       /* Blue  — blue inputs, toggle, add button  */
-  --color-secondary:  #1CB332;       /* Green — green inputs, toggle label       */
-  --color-button:     #2B7023;       /* Dark green — main action button          */
-  --color-yellow:     #E6A817;       /* Yellow — alternate extra section borders */
-  --color-bg:         #f4f4f0;       /* Page background                          */
-  --color-white:      #f1f1f1;
+  
+  --color-primary:    #5386F4;       
+  --color-secondary:  #1CB332;       
+  --color-button:     #2B7023;       
+  --color-yellow:     #E6A817;       
+  --color-bg:         #f4f4f0;       
+  --color-white:      #ffffff;
   --color-text:       #111111;
   --color-text-muted: #555555;
   --color-border:     #bbbbbb;
   --color-overlay:    rgba(0,0,0,0.5);
 
-  /* Typography */
+  
   --font:          'Inclusive Sans', sans-serif;
   --font-size-xs:  12px;
   --font-size-sm:  14px;
@@ -22,7 +20,7 @@
   --font-size-xl:  20px;
   --font-size-2xl: 32px;
 
-  /* Sizes */
+  
   --input-height:    62px;
   --input-radius:    40px;
   --button-radius:   30px;
@@ -36,7 +34,6 @@
   --gap-lg:  28px;
 }
 
-/* Reset */
 *, *::before, *::after {
   box-sizing: border-box;
   margin: 0;

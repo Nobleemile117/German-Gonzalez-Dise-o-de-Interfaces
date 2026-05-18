@@ -1,4 +1,3 @@
-
 <template>
   <div class="btn-add-row">
     <span class="btn-add-row__label">{{ label }}</span>
@@ -23,6 +22,7 @@ export default {
 </script>
 
 <style scoped>
+
 .btn-add-row {
   display: flex;
   align-items: center;

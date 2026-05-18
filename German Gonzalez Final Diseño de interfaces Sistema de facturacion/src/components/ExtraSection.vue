@@ -1,21 +1,24 @@
-
 <template>
   <div class="extra-section">
 
+    
     <div class="extra-section__divider"
          :class="`extra-section__divider--${color}`"></div>
 
+    
     <div class="extra-section__title"
          :class="`extra-section__title--${color}`">
       Razón Fiscal adicional #{{ displayIndex }}
     </div>
 
+    
     <InputField
       label="Correo"
       :color="color"
       :model-value="modelValue.correo"
       @update:model-value="update('correo', $event)" />
 
+    
     <InputField
       label="RFC"
       :color="color"
@@ -25,6 +28,7 @@
       @update:model-value="update('rfc', $event)"
       @open-modal="$emit('open-modal', $event)" />
 
+    
     <InputField
       label="Razon Social"
       :color="color"
@@ -34,17 +38,20 @@
       @update:model-value="update('razonSocial', $event)"
       @open-modal="$emit('open-modal', $event)" />
 
+    
     <InputField
       label="Codigo postal"
       :color="color"
       :model-value="modelValue.codigoPostal"
       @update:model-value="update('codigoPostal', $event)" />
 
+    
     <DropdownSelect
       :options="cfdiOptions"
       :model-value="modelValue.cfdi"
       @update:model-value="update('cfdi', $event)" />
 
+    
     <DropdownSelect
       :options="regimenOptions"
       :model-value="modelValue.regimen"
@@ -85,8 +92,10 @@ export default {
   },
 
   computed: {
+    
     displayIndex() { return this.index + 2 },
 
+    
     color() {
       return this.index % 2 === 0 ? 'yellow' : 'green'
     },

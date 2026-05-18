@@ -1,13 +1,13 @@
-
 <template>
+  
   <div v-if="isOpen" class="modal-overlay" @click.self="$emit('close')">
     <div class="modal">
 
-      <!-- × close button -->
+      
       <button class="modal__close" @click="$emit('close')">×</button>
 
       <div class="modal__title">{{ title }}</div>
-      <!-- v-html renders the subtitle with <strong> tags -->
+      
       <p class="modal__subtitle" v-html="subtitle"></p>
       <img class="modal__img" :src="image" :alt="title">
 
@@ -24,6 +24,7 @@ export default {
   },
   emits: ['close'],
 
+  
   computed: {
     isTicket() { return this.type === 'ticket' },
 
@@ -47,6 +48,7 @@ export default {
 </script>
 
 <style scoped>
+
 .modal-overlay {
   position: fixed;
   inset: 0;

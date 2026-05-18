@@ -1,4 +1,3 @@
-
 <template>
   <div v-if="isOpen" class="modal-overlay" @click.self="$emit('close')">
     <div class="modal modal--success">
@@ -8,6 +7,7 @@
       <div class="modal__icon">✅</div>
       <div class="modal__title">¡Factura Generada!</div>
 
+      
       <table class="modal__table">
         <tr v-for="row in rows" :key="row.label">
           <td class="modal__table-label">{{ row.label }}</td>

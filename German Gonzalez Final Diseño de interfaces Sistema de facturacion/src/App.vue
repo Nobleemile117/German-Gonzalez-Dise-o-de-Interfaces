@@ -1,8 +1,7 @@
-
 <template>
   <div class="app">
 
-    <!-- HEADER -->
+    
     <BrazzaHeader
       :logo="CONFIG.header.logo"
       :title="CONFIG.header.title"
@@ -10,7 +9,7 @@
 
     <div class="form-body">
 
-      <!-- ══ LEFT COLUMN ══ -->
+      
       <div class="col col--left">
 
         <InputField
@@ -29,7 +28,7 @@
           v-model="form.dia"
           @open-modal="openModal" />
 
-
+        
         <InputField
           v-if="phase === 0"
           :label="CONFIG.inputMontoVenta.label"
@@ -44,16 +43,17 @@
           :disabled="!isFormValid"
           @click="generarFactura" />
 
-        <!-- Validation error message  -->
+        
         <div v-if="showValidationError" class="validation-error">
           ⚠️ Por favor completa todos los campos y selecciona las opciones de los menús antes de facturar.
         </div>
 
       </div>
 
-      <!-- ══ RIGHT COLUMN ══ -->
+      
       <div class="col col--right">
 
+        
         <InputField
           :label="CONFIG.inputRFC.label"
           :color="CONFIG.inputRFC.color"
@@ -87,20 +87,23 @@
           :color="CONFIG.inputCorreo.color"
           v-model="form.correo" />
 
+        
         <InputField
           v-if="phase >= 1"
           label="Monto"
           color="green"
           v-model="form.monto1" />
 
-
+        
         <template v-for="(section, i) in sections" :key="i">
 
+          
           <ExtraSection
             :index="i"
             v-model="sections[i]"
             @open-modal="openModal" />
 
+          
           <InputField
             label="Monto"
             :color="sectionColor(i)"
@@ -109,7 +112,7 @@
 
         </template>
 
-
+        
         <AddSectionButton
           :label="CONFIG.btnAgregar.label"
           @click="addSection" />
@@ -117,7 +120,7 @@
       </div>
     </div>
 
-    <!-- MODALS -->
+    
     <HelpModal
       :is-open="activeModal === 'modal-ticket'"
       type="ticket"
@@ -162,6 +165,7 @@ export default {
   data() {
     return {
 
+      
       CONFIG: {
         header: {
           logo:    'Logo_brazza_svg_.svg',
@@ -180,9 +184,10 @@ export default {
         toggleVerificar: { label: 'Verificar Información'     },
       },
 
-      /* ── PHASEs ── */
+      
       phase: 0,
 
+      
       form: {
         ticket:      '',
         dia:         '',
@@ -197,7 +202,7 @@ export default {
         monto1:      '',  
       },
 
-
+      
       sections: [],
 
       cfdiOptions:    CFDI_DATA,
@@ -210,11 +215,11 @@ export default {
   },
 
   computed: {
-
+    
     isFormValid() {
       const f = this.form
 
-      /* Section 1 — always required */
+      
       const s1 = [
         f.ticket, f.dia, f.rfc,
         f.razonSocial, f.codigoPostal,
@@ -223,11 +228,11 @@ export default {
 
       if (!s1) return false
 
-      /* Monto depends on phase */
+      
       if (this.phase === 0 && !f.montoVenta.trim()) return false
       if (this.phase >= 1  && !f.monto1.trim())    return false
 
-      /* Extra sections — all fields required */
+      
       for (const s of this.sections) {
         const ok = [
           s.correo, s.rfc, s.razonSocial,
@@ -245,15 +250,18 @@ export default {
     openModal(id) { this.activeModal = id   },
     closeModal()  { this.activeModal = null },
 
+    
     sectionColor(i) {
       return i % 2 === 0 ? 'yellow' : 'green'
     },
 
-    /* ── TWO-PHASE BUTTON ──*/
+    
     addSection() {
       if (this.phase === 0) {
+        
         this.phase = 1
       }
+      
       this.sections.push({
         monto:        '',
         correo:       '',
@@ -265,10 +273,11 @@ export default {
       })
     },
 
-
+    
     buildRows() {
       const rows = []
 
+      
       rows.push({ label: 'Sección 1 – Numero de Ticket', value: this.form.ticket        })
       rows.push({ label: 'Sección 1 – Dia de la venta',  value: this.form.dia           })
       rows.push({ label: 'Sección 1 – RFC',              value: this.form.rfc           })
@@ -284,7 +293,7 @@ export default {
         rows.push({ label: 'Sección 1 – Monto', value: this.form.monto1 })
       }
 
-      /* Sections  */
+      
       this.sections.forEach((s, i) => {
         const n = i + 2
         rows.push({ label: `Sección ${n} – Correo`,         value: s.correo       })
@@ -299,8 +308,7 @@ export default {
       return rows
     },
 
-    /* ── FACTURAR ──
- */
+    
     generarFactura() {
       if (!this.isFormValid) {
         this.showValidationError = true
@@ -309,20 +317,22 @@ export default {
       this.showValidationError = false
       const rows = this.buildRows()
 
+      
       this.summaryRows = rows
       this.showSuccess = true
 
-      /* Generate PDF */
+      
       this.generarPDF(rows)
     },
 
-    /* ── GENERATE PDF ──. */
+    
     generarPDF(rows) {
       const doc    = new jsPDF()
       const margin = 20
       const pageH  = doc.internal.pageSize.getHeight()
       let   y      = 20
 
+      
       const checkPage = () => {
         if (y > pageH - 15) { doc.addPage(); y = 20 }
       }
@@ -332,25 +342,29 @@ export default {
       rows.forEach(row => {
         checkPage()
 
+        
         const match = row.label.match(/^(Sección \d+)/)
         if (match && match[1] !== lastSection) {
           lastSection = match[1]
 
+          
           if (y > 20) y += 6
 
+          
           doc.setFontSize(11)
           doc.setFont('helvetica', 'bold')
           doc.setTextColor(0, 0, 0)
           doc.text(lastSection, margin, y)
           y += 6
 
-          /* Simple underline */
+          
           doc.setDrawColor(0, 0, 0)
           doc.line(margin, y, margin + 60, y)
           y += 6
           checkPage()
         }
 
+        
         const cleanLabel  = row.label.replace(/^Sección \d+ – /, '')
         const displayValue = row.value || '—'
 
@@ -361,7 +375,7 @@ export default {
         y += 7
       })
 
-      /* Download */
+      
       const fecha = new Date().toLocaleDateString('es-MX').replace(/\//g, '-')
       doc.save(`factura-brazza-${fecha}.pdf`)
     },
@@ -384,7 +398,6 @@ export default {
 
 .col { display: flex; flex-direction: column; gap: 24px; }
 
-/* Validation error message shown below the Facturar button */
 .validation-error {
   font-size: var(--font-size-sm);
   color: #c0392b;

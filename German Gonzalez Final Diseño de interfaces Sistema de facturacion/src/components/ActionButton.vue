@@ -1,4 +1,3 @@
-
 <template>
   <button class="btn-action" :disabled="disabled" @click="$emit('click')">
     {{ label }}
@@ -17,6 +16,7 @@ export default {
 </script>
 
 <style scoped>
+
 .btn-action {
   width: 160px;
   height: 52px;
@@ -33,7 +33,6 @@ export default {
 .btn-action:hover  { background: #1e5216; }
 .btn-action:active { transform: scale(0.97); }
 
-/* Disabled state — grayed out, not clickable */
 .btn-action:disabled {
   background: #aaa;
   cursor: not-allowed;

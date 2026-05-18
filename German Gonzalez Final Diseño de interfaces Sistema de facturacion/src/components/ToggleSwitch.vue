@@ -1,10 +1,10 @@
-
 <template>
   <div class="toggle-row">
 
-
+    
     <span class="toggle-row__label">{{ label }}</span>
 
+    
     <label class="toggle">
       <input
         class="toggle__input"
@@ -29,6 +29,7 @@ export default {
 </script>
 
 <style scoped>
+
 .toggle-row {
   display: flex;
   align-items: center;
